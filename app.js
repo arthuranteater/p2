@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     var card = document.querySelectorAll('.card')
     var card_img = document.querySelectorAll('.center-block')
 
-    var last = localStorage.getItem('fav') || {}
+    var last = localStorage.getItem('fav') || ''
     city.value = last
 
 
