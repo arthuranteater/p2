@@ -23,6 +23,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
     var card = document.querySelectorAll('.card')
     var card_img = document.querySelectorAll('.center-block')
 
+    var last = localStorage.getItem('fav') || {}
+    city.value = last
+
+
+
     function getRandom(min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
     }
@@ -44,6 +49,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         if (result.data.length === 0) {
           alert.className = 'alert alert-danger'
           alert.innerHTML = `Can't Find Your City!`
+
           setTimeout(function(){alert.innerHTML =''; alert.className =''}, 3000)
           for (let i=0; i < card.length; i++) {
             card[i].className = 'card text-center mx-auto invisible'
@@ -51,6 +57,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         } else {
           for (let i = result.data.length -1; i >= 0; i--) {
             if (result.data[i].title === city.value) {
+              localStorage.setItem('fav', `${city.value}`)
               alert.innerHTML = `Found Your City!`
               alert.className = 'alert alert-success'
               earth.remove()
