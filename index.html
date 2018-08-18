@@ -23,7 +23,7 @@
         <div class="col auto">
           <form class="" action="index.html" method="post">
             <input id='city' type="text" name="" value="" placeholder='Type in City' required>
-            <input id='search' class='bg-primary' type="submit" name="" value="Search">
+            <input id='search' class='btn btn-primary' type="submit" name="" value="Search">
           </form>
         </div>
       </div>
@@ -48,6 +48,12 @@
       </div>
 
       <div class="row mt-3">
+        <div class="col-4 mx-auto">
+          <button id='toggle' type="button" class="btn btn-primary invisible" data-toggle="button" aria-pressed="false" autocomplete="off">℃ | ℉</button>
+          </div>
+        </div>
+
+      <div class="row mt-3">
         <div class="col auto">
           <div class="card text-center mx-auto invisible" style="width: 16rem; color: black; font-size: 12px">
             <div class="card-body">
@@ -62,7 +68,7 @@
                 <p style="font-size: 16px">Humidity: <span style='font-weight: bold; font-size: 20px' class='humidity'></span></p>
               </div>
 
-              <button type="button" class="btn btn-info text-center" name="" style='font-size:10px'>5 Day Forecast</button>
+              <button id='five' type="button" class="btn btn-info text-center" name="" style='font-size:10px'>5 Day Forecast</button>
             </div>
           </div>
         </div>

@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     var alert = document.querySelector('#alert')
     var which = document.querySelector('#which')
     var five = document.querySelector('.btn')
+    var toggle = document.querySelector('#toggle')
 
     var title = document.querySelectorAll('.card-title')
     var date = document.querySelectorAll('.date')
@@ -54,8 +55,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
               localStorage.setItem('fav', `${city.value}`)
               alert.innerHTML = `Found Your City!`
               alert.className = 'alert alert-success'
-              earth.remove()
               setTimeout(function(){alert.innerHTML =''; alert.className =''}, 3000)
+              earth.remove()
+              toggle.className = 'btn btn-primary'
               var id = result.data[i].woeid
               axios.get(`https://pixabay.com/api/?key=9836168-009d64875ade45aed31f53b02&q=${city.value}&image_type=photo`).then(result => {
                 var maxhit = result.data.hits.length
@@ -101,5 +103,12 @@ five.addEventListener('click', function(event) {
     }
 
 }) //eventlistener
+// toggle.addEventListener('click', function(event) {
+//   if (f.className.contains('active')) {
+//     for (let i=0; i < card.length; i++) {
+//       temp.innerHTML = temp.innerHTML * 1.8 + 32
+//     }
+//   }
+// })
 
 }); //dom
