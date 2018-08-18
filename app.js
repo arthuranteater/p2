@@ -23,16 +23,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
     var card = document.querySelectorAll('.card')
     var card_img = document.querySelectorAll('.center-block')
 
-    var last = localStorage.getItem('fav') || ''
-    city.value = last
+    var set = () => city.value = localStorage.getItem('fav') || ''
+    set()
 
-
-
-    function getRandom(min, max) {
-      return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-
-
+    var getRandom = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min
 
 
     search.addEventListener('click', function(event) {
