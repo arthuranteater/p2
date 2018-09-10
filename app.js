@@ -1,6 +1,7 @@
 
 
 document.addEventListener("DOMContentLoaded", function(event) {
+
     var earth = document.querySelector('#earth')
     var search = document.querySelector('#search')
     var body = document.querySelector('body')
@@ -129,7 +130,7 @@ five.addEventListener('click', function(event) {
     }
   }
 
-}) // five list
+}) // five listener
 
 
-}); //dom
+}); // DOM
