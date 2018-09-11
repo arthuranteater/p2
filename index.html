@@ -1,183 +1,206 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=500, initial-scale=1">
-    <meta name="twitter:" content="">
-    <title>Weather Now</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" href="main.css">
-    <script rel ="stylesheet"src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js" defer></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    <script type="text/javascript" src='app.js'defer></script>
-  </head>
-  <body>
-    <div class="container mt-3">
 
-      <nav class="navbar fixed-top justify-content-center" style="background-color: black">
-        <a class="navbar-brand" href="#"><span style='color: white; font-size: 22px;'>What's the Weather In...</span></a>
-      </nav>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=500, initial-scale=1">
+  <meta name="twitter:" content="">
+  <title>Weather Now</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="main.css">
+  <script rel="stylesheet" src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js" defer></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <script type="text/javascript" src='app.js' defer></script>
+</head>
 
-      <br>
+<body>
+  <div class="container mt-3">
 
-      <div class="row text-center mt-5">
-        <div class="col auto">
-          <form class="" action="index.html" method="post">
-            <input id='city' type="text" name="" value="" placeholder='Type in City' required>
-            <input id='search' class='btn btn-primary' type="submit" name="" value="Search">
-          </form>
+    <nav class="navbar fixed-top justify-content-center" style="background-color: black">
+      <a class="navbar-brand" href="#"><span style='color: white; font-size: 22px;'>What's the Weather In...</span></a>
+    </nav>
+
+    <br>
+
+    <div class="row text-center mt-5">
+      <div class="col auto">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+          <label class="btn btn-secondary active">
+            <input type="radio" name="options" id="C" autocomplete="off" checked> ℃
+          </label>
+          <label class="btn btn-secondary">
+            <input type="radio" name="options" id="F" autocomplete="off"> ℉
+          </label>
+          <label class="btn btn-secondary">
+            <input type="radio" name="options" id="K" autocomplete="off"> K
+          </label>
         </div>
       </div>
-
-
-      <div class="row mt-3">
-        <div class="col-4 mx-auto">
-          <div id='which' class="" role='alert'></div>
-          </div>
-        </div>
-
-      <div class="row mt-3">
-        <div class="col-4 mx-auto">
-          <div id='alert' class="" role='alert'></div>
-          </div>
-        </div>
-
-      <div class="row text-center mt-3">
-        <div class="col auto">
-            <img id="earth" src="http://bestanimations.com/Earth&Space/Earth/earth-spinning-rotating-animation-28.gif#.W3RVOPgyWT4.link" alt="spinning earth">
-        </div>
-      </div>
-
-      <div class="row text-center mt-3">
-        <div class="col-4 mx-auto">
-          <button id='cF' type="button" class="btn btn-primary invisible" data-toggle="button" aria-pressed="false" autocomplete="off">℃ | ℉</button>
-          </div>
-        </div>
-
-      <div class="row mt-3">
-        <div class="col auto">
-          <div class="card text-center mx-auto invisible" style="width: 16rem; color: black; font-size: 12px">
-            <div class="card-body">
-              <h5 class="date"></h5>
-              <img class="center-block mb-2" style="width:100px;height:100px;" src="" alt="">
-              <h5 class="card-title"></h5>
-
-              <div class="text-left ml-1">
-                <p style="font-size: 16px">Temperature: <span style='font-weight: bold; font-size: 20px' class='temp'></span></>
-                <p style="font-size: 16px">Range: <span style='font-weight: bold; font-size: 20px' class='low'></span><span style='font-weight: bold; font-size: 20px' class='high'></span></p>
-                <p style="font-size: 16px">Wind: <span style='font-weight: bold; font-size: 20px' class='speed'></span><span style='font-weight: bold; font-size: 20px' class='direction'></span></p>
-                <p style="font-size: 16px">Humidity: <span style='font-weight: bold; font-size: 20px' class='humidity'></span></p>
-              </div>
-
-              <button id='five' type="button" class="btn btn-info text-center" data-toggle="button" aria-pressed="false" autocomplete="off" style='font-size:10px'>5 Day Forecast</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row mt-3">
-        <div class="col auto">
-          <div class="card text-center mx-auto invisible" style="width: 16rem; color: black; font-size: 12px">
-            <div class="card-body">
-              <h5 class="date"></h5>
-              <img class="center-block" style="width:100px;height:100px;" src="" alt="">
-              <h5 class="card-title"></h5>
-
-              <div class="text-left ml-1">
-                <p style="font-size: 16px">Temperature: <span style='font-weight: bold; font-size: 20px' class='temp'></span></>
-                <p style="font-size: 16px">Range: <span style='font-weight: bold; font-size: 20px' class='low'></span><span style='font-weight: bold; font-size: 20px' class='high'></span></p>
-                <p style="font-size: 16px">Wind: <span style='font-weight: bold; font-size: 20px' class='speed'></span><span style='font-weight: bold; font-size: 20px' class='direction'> </span></p>
-                <p style="font-size: 16px">Humidity: <span style='font-weight: bold; font-size: 20px' class='humidity'></span></p>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row mt-3">
-        <div class="col auto">
-          <div class="card text-center mx-auto invisible" style="width: 16rem; color: black; font-size: 12px">
-            <div class="card-body">
-              <h5 class="date"></h5>
-              <img class="center-block mb-1" style="width:100px;height:100px;" src="" alt="">
-              <h5 class="card-title"></h5>
-
-              <div class="text-left ml-1">
-                <p style="font-size: 16px">Temperature: <span style='font-weight: bold; font-size: 20px' class='temp'></span></>
-                <p style="font-size: 16px">Range: <span style='font-weight: bold; font-size: 20px' class='low'></span><span style='font-weight: bold; font-size: 20px' class='high'></span></p>
-                <p style="font-size: 16px">Wind: <span style='font-weight: bold; font-size: 20px' class='speed'></span><span style='font-weight: bold; font-size: 20px' class='direction'></span></p>
-                <p style="font-size: 16px">Humidity: <span style='font-weight: bold; font-size: 20px' class='humidity'></span></p>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row mt-3">
-        <div class="col auto">
-          <div class="card text-center mx-auto invisible" style="width: 16rem; color: black; font-size: 12px">
-            <div class="card-body">
-              <h5 class="date"></h5>
-              <img class="center-block mb-1" style="width:100px;height:100px;" src="" alt="">
-              <h5 class="card-title"></h5>
-
-              <div class="text-left ml-1">
-                <p style="font-size: 16px">Temperature: <span style='font-weight: bold; font-size: 20px' class='temp'></span></>
-                <p style="font-size: 16px">Range: <span style='font-weight: bold; font-size: 20px' class='low'></span><span style='font-weight: bold; font-size: 20px' class='high'></span></p>
-                <p style="font-size: 16px">Wind: <span style='font-weight: bold; font-size: 20px' class='speed'></span><span style='font-weight: bold; font-size: 20px' class='direction'></span></p>
-                <p style="font-size: 16px">Humidity: <span style='font-weight: bold; font-size: 20px' class='humidity'></span></p>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row mt-3">
-        <div class="col auto">
-          <div class="card text-center mx-auto invisible" style="width: 16rem; color: black; font-size: 12px">
-            <div class="card-body">
-              <h5 class="date"></h5>
-              <img class="center-block mb-1" style="width:100px;height:100px;" src="" alt="">
-              <h5 class="card-title"></h5>
-
-              <div class="text-left ml-1">
-                <p style="font-size: 16px">Temperature: <span style='font-weight: bold; font-size: 20px' class='temp'></span></>
-                <p style="font-size: 16px">Range: <span style='font-weight: bold; font-size: 20px' class='low'></span><span style='font-weight: bold; font-size: 20px' class='high'></span></p>
-                <p style="font-size: 16px">Wind: <span style='font-weight: bold; font-size: 20px' class='speed'></span><span style='font-weight: bold; font-size: 20px' class='direction'></span></p>
-                <p style="font-size: 16px">Humidity: <span style='font-weight: bold; font-size: 20px' class='humidity'></span></p>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row mt-3">
-        <div class="col auto">
-          <div class="card text-center mx-auto invisible" style="width: 16rem; color: black; font-size: 12px">
-            <div class="card-body">
-              <h5 class="date"></h5>
-              <img class="center-block mb-1" style="width:100px;height:100px;" src="" alt="">
-              <h5 class="card-title"></h5>
-
-              <div class="text-left ml-1">
-                <p style="font-size: 16px">Temperature: <span style='font-weight: bold; font-size: 20px' class='temp'></span></>
-                <p style="font-size: 16px">Range: <span style='font-weight: bold; font-size: 20px' class='low'></span><span style='font-weight: bold; font-size: 20px' class='high'></span></p>
-                <p style="font-size: 16px">Wind: <span style='font-weight: bold; font-size: 20px' class='speed'></span><span style='font-weight: bold; font-size: 20px' class='direction'></span></p>
-                <p style="font-size: 16px">Humidity: <span style='font-weight: bold; font-size: 20px' class='humidity'></span></p>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </div>
-
     </div>
 
-  </body>
+
+    <div class="row text-center mt-5">
+      <div class="col auto">
+        <form class="" action="index.html" method="post">
+          <input id='city' type="text" name="" value="" placeholder='Type in City' required>
+          <input id='search' class='btn btn-primary' type="submit" name="" value="Search">
+        </form>
+      </div>
+    </div>
+
+
+    <div class="row mt-3">
+      <div class="col-4 mx-auto">
+        <div id='which' class="" role='alert'></div>
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col-4 mx-auto">
+        <div id='alert' class="" role='alert'></div>
+      </div>
+    </div>
+
+    <div class="row text-center mt-3">
+      <div class="col auto">
+        <img id="earth" src="http://bestanimations.com/Earth&Space/Earth/earth-spinning-rotating-animation-28.gif#.W3RVOPgyWT4.link" alt="spinning earth">
+
+
+
+        </div>
+    </div>
+
+    <div class="row text-center mt-3">
+      <div class="col-4 mx-auto">
+        <button id='cF' type="button" class="btn btn-primary invisible" data-toggle="button" aria-pressed="false" autocomplete="off">℃ | ℉</button>
+      </div>
+    </div>
+
+    <div id='today' class="row mt-3">
+      <div class="col auto">
+        <div class="card text-center mx-auto invisible" style="width: 16rem; color: black; font-size: 12px">
+          <div class="card-body">
+            <h5 class="date"></h5>
+            <img class="center-block mb-2" style="width:100px;height:100px;" src="" alt="">
+            <h5 class="card-title"></h5>
+
+            <div class="text-left ml-1">
+              <p style="font-size: 16px">Temperature: <span style='font-weight: bold; font-size: 20px' class='temp'></span><span class='symbol'> ℃</span></p>
+              <p style="font-size: 16px">Range: <span style='font-weight: bold; font-size: 20px' class='low'></span><span style='font-weight: bold; font-size: 20px' class='high'></span><span class='symbol'> ℃</span></p>
+              <p style="font-size: 16px">Wind: <span style='font-weight: bold; font-size: 20px' class='speed'></span><span style='font-weight: bold; font-size: 20px' class='direction'></span></p>
+              <p style="font-size: 16px">Humidity: <span style='font-weight: bold; font-size: 20px' class='humidity'></span></p>
+            </div>
+
+            <button id='five' type="button" class="btn btn-info text-center" data-toggle="button" aria-pressed="false" autocomplete="off" style='font-size:10px'>5 Day Forecast</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id='one' class="row mt-3">
+      <div class="col auto">
+        <div class="card text-center mx-auto invisible" style="width: 16rem; color: black; font-size: 12px">
+          <div class="card-body">
+            <h5 class="date"></h5>
+            <img class="center-block" style="width:100px;height:100px;" src="" alt="">
+            <h5 class="card-title"></h5>
+
+            <div class="text-left ml-1">
+              <p style="font-size: 16px">Temperature: <span style='font-weight: bold; font-size: 20px' class='temp'></span><span class='symbol'> ℃</span></p>
+              <p style="font-size: 16px">Range: <span style='font-weight: bold; font-size: 20px' class='low'></span><span style='font-weight: bold; font-size: 20px' class='high'></span><span class='symbol'> ℃</span></p>
+              <p style="font-size: 16px">Wind: <span style='font-weight: bold; font-size: 20px' class='speed'></span><span style='font-weight: bold; font-size: 20px' class='direction'></span></p>
+              <p style="font-size: 16px">Humidity: <span style='font-weight: bold; font-size: 20px' class='humidity'></span></p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id='two' class="row mt-3">
+      <div class="col auto">
+        <div class="card text-center mx-auto invisible" style="width: 16rem; color: black; font-size: 12px">
+          <div class="card-body">
+            <h5 class="date"></h5>
+            <img class="center-block mb-1" style="width:100px;height:100px;" src="" alt="">
+            <h5 class="card-title"></h5>
+
+            <div class="text-left ml-1">
+              <p style="font-size: 16px">Temperature: <span style='font-weight: bold; font-size: 20px' class='temp'></span><span class='symbol'> ℃</span></p>
+              <p style="font-size: 16px">Range: <span style='font-weight: bold; font-size: 20px' class='low'></span><span style='font-weight: bold; font-size: 20px' class='high'></span><span class='symbol'> ℃</span></p>
+              <p style="font-size: 16px">Wind: <span style='font-weight: bold; font-size: 20px' class='speed'></span><span style='font-weight: bold; font-size: 20px' class='direction'></span></p>
+              <p style="font-size: 16px">Humidity: <span style='font-weight: bold; font-size: 20px' class='humidity'></span></p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id='three' class="row mt-3">
+      <div class="col auto">
+        <div class="card text-center mx-auto invisible" style="width: 16rem; color: black; font-size: 12px">
+          <div class="card-body">
+            <h5 class="date"></h5>
+            <img class="center-block mb-1" style="width:100px;height:100px;" src="" alt="">
+            <h5 class="card-title"></h5>
+
+            <div class="text-left ml-1">
+              <p style="font-size: 16px">Temperature: <span style='font-weight: bold; font-size: 20px' class='temp'></span><span class='symbol'> ℃</span></p>
+              <p style="font-size: 16px">Range: <span style='font-weight: bold; font-size: 20px' class='low'></span><span style='font-weight: bold; font-size: 20px' class='high'></span><span class='symbol'> ℃</span></p>
+              <p style="font-size: 16px">Wind: <span style='font-weight: bold; font-size: 20px' class='speed'></span><span style='font-weight: bold; font-size: 20px' class='direction'></span></p>
+              <p style="font-size: 16px">Humidity: <span style='font-weight: bold; font-size: 20px' class='humidity'></span></p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id='four' class="row mt-3">
+      <div class="col auto">
+        <div class="card text-center mx-auto invisible" style="width: 16rem; color: black; font-size: 12px">
+          <div class="card-body">
+            <h5 class="date"></h5>
+            <img class="center-block mb-1" style="width:100px;height:100px;" src="" alt="">
+            <h5 class="card-title"></h5>
+
+            <div class="text-left ml-1">
+              <p style="font-size: 16px">Temperature: <span style='font-weight: bold; font-size: 20px' class='temp'></span><span class='symbol'> ℃</span></p>
+              <p style="font-size: 16px">Range: <span style='font-weight: bold; font-size: 20px' class='low'></span><span style='font-weight: bold; font-size: 20px' class='high'></span><span class='symbol'> ℃</span></p>
+              <p style="font-size: 16px">Wind: <span style='font-weight: bold; font-size: 20px' class='speed'></span><span style='font-weight: bold; font-size: 20px' class='direction'></span></p>
+              <p style="font-size: 16px">Humidity: <span style='font-weight: bold; font-size: 20px' class='humidity'></span></p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id='five' class="row mt-3">
+      <div class="col auto">
+        <div class="card text-center mx-auto invisible" style="width: 16rem; color: black; font-size: 12px">
+          <div class="card-body">
+            <h5 class="date"></h5>
+            <img class="center-block mb-1" style="width:100px;height:100px;" src="" alt="">
+            <h5 class="card-title"></h5>
+
+            <div class="text-left ml-1">
+              <p style="font-size: 16px">Temperature: <span style='font-weight: bold; font-size: 20px' class='temp'></span><span class='symbol'> ℃</span></p>
+              <p style="font-size: 16px">Range: <span style='font-weight: bold; font-size: 20px' class='low'></span><span style='font-weight: bold; font-size: 20px' class='high'></span><span class='symbol'> ℃</span></p>
+              <p style="font-size: 16px">Wind: <span style='font-weight: bold; font-size: 20px' class='speed'></span><span style='font-weight: bold; font-size: 20px' class='direction'></span></p>
+              <p style="font-size: 16px">Humidity: <span style='font-weight: bold; font-size: 20px' class='humidity'></span></p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+
 </html>

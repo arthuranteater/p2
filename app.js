@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         if (city_data.length === 0) {
           alert.className = 'alert alert-danger'
           alert.innerHTML = `Can't Find Your City!`
-          setTimeout(function(){alert.innerHTML =''; alert.className =''}, 3000)
+          setTimeout(function(){alert.innerHTML =''; alert.className =''}, 4000)
 
           for (let i=0; i < card.length; i++) {
             card[i].className = 'card text-center mx-auto invisible'
@@ -66,10 +66,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 var maxhit = city_pic.hits.length
                 var rand = getRandom(0, maxhit)
                 body.style.backgroundImage = `url('${city_pic.hits[rand].largeImageURL}')`
-                cF.className = 'btn btn-primary'
               })
               axios.get(`https://cors-anywhere.herokuapp.com/http://www.metaweather.com/api/location/${id}`).then(result => {
                 var weatherC = result.data.consolidated_weather
+                cF.className = 'btn btn-primary'
                 for (let j=0; j < card.length; j++) {
                   date[j].textContent = weatherC[j].applicable_date
                   title[j].textContent = city.value
@@ -81,6 +81,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                   direction[j].innerHTML = ` ${weatherC[j].wind_direction_compass}`
                   card_img[j].src = `http://www.metaweather.com/static/img/weather/${weatherC[i].weather_state_abbr}.svg`
                   card[0].className = 'card text-center mx-auto'
+
                 }
               })
             } else {
@@ -98,6 +99,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         } //for
       } //else
       cF.addEventListener('click', function(event) {
+        console.log(event.target)
         axios.get(`https://cors-anywhere.herokuapp.com/http://www.metaweather.com/api/location/${id}`).then(result => {
           var weather = result.data.consolidated_weather
           if (cF.classList.contains('active')) {
@@ -120,13 +122,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
 }) // search listener
 
 five.addEventListener('click', function(event) {
+  console.log(event.target)
   if (five.classList.contains('active')) {
-    for (let i=0; i < card.length; i++) {
-      card[i].className = 'card text-center mx-auto'
-    }
-  } else {
     for (let i=1; i < card.length; i++) {
       card[i].className = 'card text-center mx-auto invisible'
+    }
+  } else {
+    for (let i=0; i < card.length; i++) {
+      card[i].className = 'card text-center mx-auto'
     }
   }
 
