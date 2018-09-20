@@ -1,4 +1,8 @@
 body {
   background-color: black;
-  color: white
+  color: white;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.6);
 }
