@@ -24,6 +24,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
   const symbol2 = document.querySelectorAll(".symbol2")
   const link = document.querySelectorAll(".city-link")
 
+
   let cityId = ""
 
   let cityData = ""
@@ -56,12 +57,13 @@ document.addEventListener("DOMContentLoaded", function (event) {
         }`
       ).then(result => {
         cityData = result.data
+        console.log(cityData)
         ifNotFound()
       })
   }
 
   const ifNotFound = () => {
-    if (cityData.length === 0) {
+    if (cityData.length === 0 || cityData.length > link.length) {
       alert.className = "alert alert-danger"
       alert.innerHTML = `Can't Find Your City!`
       setTimeout(function () {
