@@ -1,27 +1,27 @@
 document.addEventListener("DOMContentLoaded", function (event) {
 
-  const earth = document.querySelector("#earth");
-  const search = document.querySelector("#search");
-  const body = document.querySelector("body");
-  const city = document.querySelector("#city");
-  const alert = document.querySelector("#alert");
-  const which = document.querySelector("#which");
-  const five = document.querySelector("#five");
-  const f = document.querySelector("#f");
-  const k = document.querySelector("#k");
+  const earth = document.querySelector("#earth")
+  const search = document.querySelector("#search")
+  const body = document.querySelector("body")
+  const city = document.querySelector("#city")
+  const alert = document.querySelector("#alert")
+  const which = document.querySelector("#which")
+  const five = document.querySelector("#five")
+  const f = document.querySelector("#f")
+  const k = document.querySelector("#k")
 
-  const title = document.querySelectorAll(".card-title");
-  const date = document.querySelectorAll(".date");
-  const temp = document.querySelectorAll(".temp");
-  const low = document.querySelectorAll(".low");
-  const high = document.querySelectorAll(".high");
-  const humidity = document.querySelectorAll(".humidity");
-  const speed = document.querySelectorAll(".speed");
-  const direction = document.querySelectorAll(".direction");
-  const card = document.querySelectorAll(".card");
-  const card_img = document.querySelectorAll(".center-block");
-  const symbol = document.querySelectorAll(".symbol");
-  const symbol2 = document.querySelectorAll(".symbol2");
+  const title = document.querySelectorAll(".card-title")
+  const date = document.querySelectorAll(".date")
+  const temp = document.querySelectorAll(".temp")
+  const low = document.querySelectorAll(".low")
+  const high = document.querySelectorAll(".high")
+  const humidity = document.querySelectorAll(".humidity")
+  const speed = document.querySelectorAll(".speed")
+  const direction = document.querySelectorAll(".direction")
+  const card = document.querySelectorAll(".card")
+  const card_img = document.querySelectorAll(".center-block")
+  const symbol = document.querySelectorAll(".symbol")
+  const symbol2 = document.querySelectorAll(".symbol2")
   const link = document.querySelectorAll(".city-link")
 
   let cityId = ""
@@ -30,75 +30,75 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
   let cityWeather = ""
 
-  const set = () => (city.value = localStorage.getItem("fav") || "");
-  set();
+  const set = () => (city.value = localStorage.getItem("fav") || "")
+  set()
 
-  const getRandom = (min, max) => Math.floor(Math.random() * (max - min)) + min;
+  const getRandom = (min, max) => Math.floor(Math.random() * (max - min)) + min
 
   const runResponse = () => {
-    alert.className = "alert alert-success";
-    alert.innerHTML = "Searching...";
+    alert.className = "alert alert-success"
+    alert.innerHTML = "Searching..."
     if (city.value === "") {
-      alert.className = "alert alert-danger";
-      alert.innerHTML = "Can't Find Your City!";
+      alert.className = "alert alert-danger"
+      alert.innerHTML = "Can't Find Your City!"
       setTimeout(function () {
-        alert.innerHTML = "";
-        alert.className = "";
-      }, 3000);
+        alert.innerHTML = ""
+        alert.className = ""
+      }, 3000)
     }
   }
 
   const getCityData = () => {
     axios
       .get(
-        `https://cors-anywhere.herokuapp.com/http://www.metaweather.com/api/location/search/?query=${
+        `https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/search/?query=${
         city.value
         }`
       ).then(result => {
-        cityData = result.data;
+        cityData = result.data
         ifNotFound()
       })
   }
 
   const ifNotFound = () => {
     if (cityData.length === 0) {
-      alert.className = "alert alert-danger";
-      alert.innerHTML = `Can't Find Your City!`;
+      alert.className = "alert alert-danger"
+      alert.innerHTML = `Can't Find Your City!`
       setTimeout(function () {
-        alert.innerHTML = "";
-        alert.className = "";
-      }, 4000);
+        alert.innerHTML = ""
+        alert.className = ""
+      }, 4000)
     } else {
       for (let i = cityData.length - 1; i >= 0; i--) {
         if (cityData[i].title === city.value) {
+          localStorage.setItem("fav", `${city.value}`)
+          cityId = cityData[i].woeid
+          earth.remove()
           getPic()
           getWeather()
-          cityId = cityData[i].woeid;
-          localStorage.setItem("fav", `${city.value}`);
-          earth.remove();
-          alert.innerHTML = `Found Your City!`;
-          alert.className = "alert alert-success";
+          alert.innerHTML = `Found Your City!`
+          alert.className = "alert alert-success"
           setTimeout(function () {
-            alert.innerHTML = "";
-            alert.className = "";
-          }, 3000);
+            alert.innerHTML = ""
+            alert.className = ""
+          }, 1000)
         } else {
-          alert.className = "alert alert-danger";
-          which.className = "alert alert-warning";
-          link[i].innerHTML = cityData[i].title;
+          alert.className = "alert alert-danger"
+          which.className = "alert alert-warning"
+          link[i].innerHTML = cityData[i].title
           if (cityData.length === 1) {
-            alert.innerHTML = "Did you mean?";
+            alert.innerHTML = "Did you mean?"
           } else {
-            alert.innerHTML = "Which one?";
+            alert.innerHTML = "Which one?"
           }
           setTimeout(function () {
-            alert.innerHTML = "";
-            alert.className = "";
-          }, 3000);
+            alert.innerHTML = ""
+            alert.className = ""
+          }, 3000)
           setTimeout(function () {
-            link[i].innerHTML = "";
-            which.className = "";
-          }, 5000);
+            link[i].innerHTML = ""
+            which.className = ""
+          }, 5000)
         }
       }
     }
@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
   const getWeather = () => {
     axios
       .get(
-        `https://cors-anywhere.herokuapp.com/http://www.metaweather.com/api/location/${cityId}`
+        `https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/${cityId}`
       ).then(result => {
         cityWeather = result.data.consolidated_weather
         addWeather()
@@ -147,39 +147,39 @@ document.addEventListener("DOMContentLoaded", function (event) {
         i
       ].src = `http://www.metaweather.com/static/img/weather/${
         cityWeather[i].weather_state_abbr
-        }.svg`;
+        }.svg`
 
       if (f.classList.contains("active")) {
         temp[i].innerHTML = Math.round(
           cityWeather[i].the_temp * 1.8 + 32
-        );
-        symbol[i].innerHTML = " ℉";
+        )
+        symbol[i].innerHTML = " ℉"
         low[i].innerHTML = Math.round(
           cityWeather[i].min_temp * 1.8 + 32
-        );
+        )
         high[i].innerHTML = Math.round(
           cityWeather[i].max_temp * 1.8 + 32
-        );
-        symbol2[i].innerHTML = " ℉";
+        )
+        symbol2[i].innerHTML = " ℉"
       } else if (k.classList.contains("active")) {
-        temp[i].innerHTML = Math.round(cityWeather[i].the_temp + 273);
-        symbol[i].innerHTML = " K";
-        low[i].innerHTML = Math.round(cityWeather[i].min_temp + 273);
-        high[i].innerHTML = Math.round(cityWeather[i].max_temp + 273);
-        symbol2[i].innerHTML = " K";
+        temp[i].innerHTML = Math.round(cityWeather[i].the_temp + 273)
+        symbol[i].innerHTML = " K"
+        low[i].innerHTML = Math.round(cityWeather[i].min_temp + 273)
+        high[i].innerHTML = Math.round(cityWeather[i].max_temp + 273)
+        symbol2[i].innerHTML = " K"
       } else {
-        temp[i].innerHTML = Math.round(cityWeather[i].the_temp);
-        symbol[i].innerHTML = " ℃";
-        low[i].innerHTML = Math.round(cityWeather[i].min_temp);
-        high[i].innerHTML = Math.round(cityWeather[i].max_temp);
-        symbol2[i].innerHTML = " ℃";
+        temp[i].innerHTML = Math.round(cityWeather[i].the_temp)
+        symbol[i].innerHTML = " ℃"
+        low[i].innerHTML = Math.round(cityWeather[i].min_temp)
+        high[i].innerHTML = Math.round(cityWeather[i].max_temp)
+        symbol2[i].innerHTML = " ℃"
       }
     }
-    card[0].className = "card text-center mx-auto";
+    card[0].className = "card text-center mx-auto"
   }
 
   search.addEventListener("click", event => {
-    event.preventDefault();
+    event.preventDefault()
     runResponse()
     getCityData()
   })
@@ -188,11 +188,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
     event.preventDefault()
     if (five.classList.contains("active")) {
       for (let i = 1; i < card.length; i++) {
-        card[i].className = "card text-center mx-auto invisible";
+        card[i].className = "card text-center mx-auto invisible"
       }
     } else {
       for (let i = 0; i < card.length; i++) {
-        card[i].className = "card text-center mx-auto";
+        card[i].className = "card text-center mx-auto"
       }
     }
   })
