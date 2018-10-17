@@ -59,6 +59,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
         cityData = result.data
         console.log(cityData)
         ifNotFound()
+      }).catch(error => {
+        if (error.response) {
+          console.log("CityData", error.response.data);
+          console.log("CityData", error.response.status);
+          console.log("CityData", error.response.headers);
+        }
       })
   }
 
@@ -121,7 +127,13 @@ document.addEventListener("DOMContentLoaded", function (event) {
         body.style.backgroundImage = `url('${
           city_pic.hits[rand].largeImageURL
           }')`;
-      });
+      }).catch(error => {
+        if (error.response) {
+          console.log("Pic", error.response.data);
+          console.log("Pic", error.response.status);
+          console.log("Pic", error.response.headers);
+        }
+      })
   }
 
   const getWeather = () => {
@@ -131,6 +143,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
       ).then(result => {
         cityWeather = result.data.consolidated_weather
         addWeather()
+      }).catch(error => {
+        if (error.response) {
+          console.log("Weather", error.response.data);
+          console.log("Weather", error.response.status);
+          console.log("Weather", error.response.headers);
+        }
       })
   }
 
