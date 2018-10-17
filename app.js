@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function(event) {
+document.addEventListener("DOMContentLoaded", function (event) {
   var earth = document.querySelector("#earth");
   var search = document.querySelector("#search");
   var body = document.querySelector("body");
@@ -21,19 +21,21 @@ document.addEventListener("DOMContentLoaded", function(event) {
   var card_img = document.querySelectorAll(".center-block");
   var symbol = document.querySelectorAll(".symbol");
   var symbol2 = document.querySelectorAll(".symbol2");
+  var link = document.querySelectorAll(".city-link")
 
   var set = () => (city.value = localStorage.getItem("fav") || "");
   set();
 
-  var getRandom = (min, max) =>
-    Math.floor(Math.random() * (max - min + 1)) + min;
+  var getRandom = (min, max) => Math.floor(Math.random() * (max - min)) + min;
 
-  search.addEventListener("click", function(event) {
+  search.addEventListener("click", function (event) {
     event.preventDefault();
+    alert.className = "alert alert-success";
+    alert.innerHTML = "Searching...";
     if (city.value === "") {
       alert.className = "alert alert-danger";
-      alert.innerHTML = `Can't Find Your City!`;
-      setTimeout(function() {
+      alert.innerHTML = "Can't Find Your City!";
+      setTimeout(function () {
         alert.innerHTML = "";
         alert.className = "";
       }, 3000);
@@ -41,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     axios
       .get(
         `https://cors-anywhere.herokuapp.com/http://www.metaweather.com/api/location/search/?query=${
-          city.value
+        city.value
         }`
       )
       .then(result => {
@@ -49,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         if (city_data.length === 0) {
           alert.className = "alert alert-danger";
           alert.innerHTML = `Can't Find Your City!`;
-          setTimeout(function() {
+          setTimeout(function () {
             alert.innerHTML = "";
             alert.className = "";
           }, 4000);
@@ -61,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
               earth.remove();
               alert.innerHTML = `Found Your City!`;
               alert.className = "alert alert-success";
-              setTimeout(function() {
+              setTimeout(function () {
                 alert.innerHTML = "";
                 alert.className = "";
               }, 3000);
@@ -69,7 +71,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
               axios
                 .get(
                   `https://pixabay.com/api/?key=9836168-009d64875ade45aed31f53b02&q=${
-                    city.value
+                  city.value
                   }&image_type=photo`
                 )
                 .then(result => {
@@ -78,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                   var rand = getRandom(0, maxhit);
                   body.style.backgroundImage = `url('${
                     city_pic.hits[rand].largeImageURL
-                  }')`;
+                    }')`;
                 });
               axios
                 .get(
@@ -95,12 +97,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
                     )} mph`;
                     direction[j].innerHTML = ` ${
                       weather[j].wind_direction_compass
-                    }`;
+                      }`;
                     card_img[
                       j
                     ].src = `http://www.metaweather.com/static/img/weather/${
                       weather[i].weather_state_abbr
-                    }.svg`;
+                      }.svg`;
 
                     if (f.classList.contains("active")) {
                       temp[j].innerHTML = Math.round(
@@ -131,29 +133,29 @@ document.addEventListener("DOMContentLoaded", function(event) {
                   card[0].className = "card text-center mx-auto";
                 });
             } else {
-              alert.className = "alert alert-warning";
-              which.className = "alert alert-danger";
-              alert.innerHTML += `| ${city_data[i].title} |`;
+              alert.className = "alert alert-danger";
+              which.className = "alert alert-warning";
+              link[i].innerHTML = city_data[i].title;
               if (city_data.length === 1) {
-                which.innerHTML = "Did you mean?";
+                alert.innerHTML = "Did you mean?";
               } else {
-                which.innerHTML = "Which one?";
+                alert.innerHTML = "Which one?";
               }
-              setTimeout(function() {
-                which.innerHTML = "";
-                which.className = "";
-              }, 3000);
-              setTimeout(function() {
+              setTimeout(function () {
                 alert.innerHTML = "";
                 alert.className = "";
+              }, 3000);
+              setTimeout(function () {
+                link[i].innerHTML = "";
+                which.className = "";
               }, 5000);
             }
           } //for
         } //else
-      }); // 1st get
+      });
   }); // search listener
 
-  five.addEventListener("click", function(event) {
+  five.addEventListener("click", function (event) {
     console.log(event.target);
     if (five.classList.contains("active")) {
       for (let i = 1; i < card.length; i++) {
@@ -165,4 +167,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
       }
     }
   }); // five listener
+
+
+  which.addEventListener("click", event => {
+    city.value = event.target.innerHTML
+  })
+
 }); // DOM
