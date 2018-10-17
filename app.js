@@ -57,7 +57,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
         }`
       ).then(result => {
         cityData = result.data
-        console.log(cityData)
         ifNotFound()
       }).catch(error => {
         if (error.response) {
