@@ -6,6 +6,8 @@ Weather forecast - web app - Vanilla Javascript, HTML
 
 Mobile first web application where users can search by city to receive a 5-day weather forecast in Celsius, Fahrenheit, or Kelvin along with a really cool picture!
 
+<a href="https://whatstheweatherin.com/">Get Your 5 Day Forecast Now, visit whatstheweatherin</a>
+
 Steps to recreate:
 
 git clone    
