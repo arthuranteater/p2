@@ -8,5 +8,5 @@ Mobile first web application where users can search by city to receive a 5-day w
 
 Steps to recreate:
 
-git clone
+git clone    
 open html in browser
